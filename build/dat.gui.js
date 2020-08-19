@@ -1595,7 +1595,9 @@ function requestAnimationFrame(callback) {
   setTimeout(callback, 1000 / 60);
 }
 var realRequestAnimationFrame = void 0;
-if (typeof window === 'undefined') realRequestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || requestAnimationFrame;else realRequestAnimationFrame = function realRequestAnimationFrame() {};
+if (typeof window !== 'undefined') {
+  realRequestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || requestAnimationFrame;
+} else realRequestAnimationFrame = function realRequestAnimationFrame() {};
 var requestAnimationFrame$1 = realRequestAnimationFrame;
 
 var CenteredDiv = function () {

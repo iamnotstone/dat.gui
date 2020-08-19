@@ -16,7 +16,7 @@ function requestAnimationFrame(callback) {
 }
 
 let realRequestAnimationFrame
-if(typeof window === 'undefined'){
+if(typeof window !== 'undefined'){
   realRequestAnimationFrame = window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
