@@ -22,6 +22,8 @@ const css = {
   },
 
   inject: function(cssContent, indoc) {
+    if(typeof document === 'undefined')
+      return
     const doc = indoc || document;
     const injected = document.createElement('style');
     injected.type = 'text/css';

@@ -1548,6 +1548,7 @@ var css = {
     doc.getElementsByTagName('head')[0].appendChild(link);
   },
   inject: function inject(cssContent, indoc) {
+    if (typeof document === 'undefined') return;
     var doc = indoc || document;
     var injected = document.createElement('style');
     injected.type = 'text/css';
