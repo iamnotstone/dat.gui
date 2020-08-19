@@ -87,6 +87,9 @@ const hideableGuis = [];
  * @param {Boolean} [params.closeOnTop=false] If true, close/open button shows on top of the GUI
  */
 const GUI = function(pars) {
+  if(typeof window === 'undefined')
+    return
+
   const _this = this;
 
   let params = pars || {};
@@ -321,6 +324,8 @@ const GUI = function(pars) {
           return useLocalStorage;
         },
         set: function(bool) {
+          if(typeof window === 'undefined')
+            return
           if (SUPPORTS_LOCAL_STORAGE) {
             useLocalStorage = bool;
             if (bool) {

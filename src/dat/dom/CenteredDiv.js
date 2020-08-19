@@ -96,6 +96,8 @@ class CenteredDiv {
   }
 
   layout() {
+    if(typeof window === 'undefined')
+      return
     this.domElement.style.left = window.innerWidth / 2 - dom.getWidth(this.domElement) / 2 + 'px';
     this.domElement.style.top = window.innerHeight / 2 - dom.getHeight(this.domElement) / 2 + 'px';
   }

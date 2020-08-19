@@ -105,6 +105,9 @@ const dom = {
    * @param params
    */
   fakeEvent: function(elem, eventType, pars, aux) {
+    if(typeof window === 'undefined')
+      return
+
     const params = pars || {};
     const className = EVENT_MAP_INV[eventType];
     if (!className) {

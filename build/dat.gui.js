@@ -1,6 +1,6 @@
 /**
  * dat-gui JavaScript Controller Library
- * http://code.google.com/p/dat-gui
+ * https://github.com/dataarts/dat.gui
  *
  * Copyright 2011 Data Arts Team, Google Creative Lab
  *
@@ -799,6 +799,7 @@ var dom = {
     }
   },
   fakeEvent: function fakeEvent(elem, eventType, pars, aux) {
+    if (typeof window === 'undefined') return;
     var params = pars || {};
     var className = EVENT_MAP_INV[eventType];
     if (!className) {
@@ -1315,13 +1316,13 @@ var ColorController = function (_Controller) {
       }
     });
     dom.bind(_this2.__input, 'blur', onBlur);
-    dom.bind(_this2.__selector, 'mousedown', function ()        {
-      dom.addClass(this, 'drag').bind(window, 'mouseup', function ()        {
+    dom.bind(_this2.__selector, 'mousedown', function () {
+      dom.addClass(this, 'drag').bind(window, 'mouseup', function () {
         dom.removeClass(_this.__selector, 'drag');
       });
     });
-    dom.bind(_this2.__selector, 'touchstart', function ()        {
-      dom.addClass(this, 'drag').bind(window, 'touchend', function ()        {
+    dom.bind(_this2.__selector, 'touchstart', function () {
+      dom.addClass(this, 'drag').bind(window, 'touchend', function () {
         dom.removeClass(_this.__selector, 'drag');
       });
     });
@@ -1593,7 +1594,9 @@ var ControllerFactory = function ControllerFactory(object, property) {
 function requestAnimationFrame(callback) {
   setTimeout(callback, 1000 / 60);
 }
-var requestAnimationFrame$1 = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || requestAnimationFrame;
+var realRequestAnimationFrame = void 0;
+if (typeof window === 'undefined') realRequestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || requestAnimationFrame;else realRequestAnimationFrame = function realRequestAnimationFrame() {};
+var requestAnimationFrame$1 = realRequestAnimationFrame;
 
 var CenteredDiv = function () {
   function CenteredDiv() {
@@ -1663,6 +1666,7 @@ var CenteredDiv = function () {
   }, {
     key: 'layout',
     value: function layout() {
+      if (typeof window === 'undefined') return;
       this.domElement.style.left = window.innerWidth / 2 - dom.getWidth(this.domElement) / 2 + 'px';
       this.domElement.style.top = window.innerHeight / 2 - dom.getHeight(this.domElement) / 2 + 'px';
     }
@@ -1690,6 +1694,7 @@ var autoPlaceContainer = void 0;
 var hide = false;
 var hideableGuis = [];
 var GUI = function GUI(pars) {
+  if (typeof window === 'undefined') return;
   var _this = this;
   var params = pars || {};
   this.domElement = document.createElement('div');
@@ -1813,6 +1818,7 @@ var GUI = function GUI(pars) {
         return useLocalStorage;
       },
       set: function set$$1(bool) {
+        if (typeof window === 'undefined') return;
         if (SUPPORTS_LOCAL_STORAGE) {
           useLocalStorage = bool;
           if (bool) {
@@ -2176,7 +2182,7 @@ function markPresetModified(gui, modified) {
 function augmentController(gui, li, controller) {
   controller.__li = li;
   controller.__gui = gui;
-  Common.extend(controller,                                   {
+  Common.extend(controller, {
     options: function options(_options) {
       if (arguments.length > 1) {
         var nextSibling = controller.__li.nextElementSibling;
