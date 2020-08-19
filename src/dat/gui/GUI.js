@@ -488,7 +488,9 @@ GUI._keydownHandler = function(e) {
     GUI.toggleHide();
   }
 };
-dom.bind(window, 'keydown', GUI._keydownHandler, false);
+
+if(typeof window !== 'undefined')
+  dom.bind(window, 'keydown', GUI._keydownHandler, false);
 
 common.extend(
   GUI.prototype,

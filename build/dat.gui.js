@@ -1947,7 +1947,7 @@ GUI._keydownHandler = function (e) {
     GUI.toggleHide();
   }
 };
-dom.bind(window, 'keydown', GUI._keydownHandler, false);
+if (typeof window !== 'undefined') dom.bind(window, 'keydown', GUI._keydownHandler, false);
 Common.extend(GUI.prototype,
 {
   add: function add(object, property) {
